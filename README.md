@@ -36,12 +36,11 @@ ___
 
 ### Endpoints:
 ```djangourlpath
-GET   api/v1/categories/  #cписок категорий 
-GET   api/v1/categories/<int:pk>  #детализация категории со вложенными услугами 
-GET   api/v1/services/ #список услуг 
-GET   api/v1/services/<int:pk>/   #детализация услуги 
+GET   api/v1/catalog/  #cписок категорий 
+GET   api/v1/catalog/<int:pk>  #детализация категории со вложенными услугами 
+GET   api/v1/item/ #список товаров 
+GET   api/v1/item/<int:pk>/   #детализация товара 
 POST  api/v1/callbacks/  #обратная связь
-POST  api/v1/ applications/ #заявка на услугу
 GET   api/v1/ contacts/ #контакты (которые рядом с заявкой)
 GET   api/v1/ social-media/ #социальные сети
 ```
