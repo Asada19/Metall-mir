@@ -33,6 +33,15 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://localhost:8080",
+    "http://localhost:3000",
+    "http://localhost:5000",
+    "https://metallo-mir-kg.vercel.com",
+]
+
+
 # Application definition
 
 INSTALLED_APPS = [
