@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Catalog, Item, ItemField
+from .models import Catalog, Item, ItemField, Parameters, Field
 from django.utils.html import format_html
+# from django import forms
 
 
 @admin.register(Catalog)
@@ -24,4 +25,27 @@ class ItemFieldInline(admin.StackedInline):
 class ItemAdmin(admin.ModelAdmin):
     inlines = [ItemFieldInline, ]
     list_display = ('title', )
+
+
+# class ItemFieldAdminForm(forms.ModelForm):
+#     class Meta:
+#         model = ItemField
+#         fields = ['value']  # Указываем, какие поля включить в форму
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         # Ограничиваем выбор полей только теми, которые относятся к каталогу товаров данного Item
+#         if self.instance and self.instance.item:
+#             self.fields['title'].queryset = self.instance.item.catalog.parameters.fields.all()
+#
+
+class FieldInline(admin.StackedInline):
+    # form = ItemFieldAdminForm
+    model = Field
+    extra = 1
+
+
+@admin.register(Parameters)
+class ParametersAdmin(admin.ModelAdmin):
+    inlines = [FieldInline]
 
