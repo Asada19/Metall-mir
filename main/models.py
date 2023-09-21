@@ -4,7 +4,7 @@ from django.db import models
 class CallBack(models.Model):
     name = models.CharField(max_length=256, verbose_name='Имя')
     phone_number = models.IntegerField(verbose_name='Номер телефона')
-    message = models.TextField(max_length=1000, verbose_name='Сообщение')
+    message = models.TextField(max_length=1000, blank=True, verbose_name='Сообщение')
     created_on = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     checked = models.BooleanField(default=False, verbose_name='Перезовнили')
 
