@@ -15,7 +15,7 @@ class Catalog(models.Model):
 
 
 class Parameters(models.Model):
-    catalog = models.OneToOneField(Catalog, on_delete=models.CASCADE, related_name='parameters')
+    catalog = models.OneToOneField('Catalog', on_delete=models.CASCADE, related_name='parameters')
 
     def __str__(self):
         return f"{self.catalog.title}'s parameters"
@@ -27,7 +27,7 @@ class Parameters(models.Model):
 
 class Field(models.Model):
     title = models.CharField(max_length=100, verbose_name='поле')
-    parameter = models.ForeignKey(Parameters, on_delete=models.CASCADE, related_name='fields')
+    parameter = models.ForeignKey('Parameters', on_delete=models.CASCADE, related_name='fields')
 
     def __str__(self):
         return self.title
@@ -39,7 +39,7 @@ class Field(models.Model):
 
 class Item(models.Model):
     title = models.CharField(max_length=100, blank=True)
-    catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, related_name='items', blank=True)
+    catalog = models.ForeignKey('Catalog', on_delete=models.CASCADE, related_name='items', blank=True)
 
     def __str__(self):
         return self.title
@@ -50,25 +50,14 @@ class Item(models.Model):
 
 
 class ItemField(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='fields')
-    title = models.ForeignKey(Field, on_delete=models.CASCADE)
+
+    item = models.ForeignKey('Item', on_delete=models.CASCADE, related_name='fields')
+    title = models.ForeignKey('Field', on_delete=models.CASCADE, max_length=100)
     value = models.CharField(max_length=100, blank=True, verbose_name='Значение')
 
     def __str__(self):
         return f'{self.title}:{self.value}'
 
-    # @property
-    # def title(self):
-    #     catalog = self.item.catalog
-    #     parameters = catalog.parameters if catalog else None
-    #     if parameters:
-    #         available_fields = Field.objects.filter(parameter=parameters)
-    #         return available_fields
-    #     else:
-    #         return Field.objects.none()
-
     class Meta:
         verbose_name = 'Поле со значением'
         verbose_name_plural = verbose_name
-
-

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Catalog, Item, ItemField, Parameters, Field
 from django.utils.html import format_html
-# from django import forms
+from django import forms
 
 
 @admin.register(Catalog)
@@ -16,31 +16,42 @@ class CatalogAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag', )
 
 
-class ItemFieldInline(admin.StackedInline):
+class ItemFieldAdminForm(forms.ModelForm):
+    # class Meta:
+    #     model = ItemField
+    #     fields = ['value']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # import pdb;pdb.set_trace()
+        # if self.instance and self.instance.itcem:
+        #     self.fields['title'].queryset = self.instance.item.catalog.parameters.fields.all()
+
+
+class ItemFieldInline(admin.TabularInline):
+    form = ItemFieldAdminForm
     model = ItemField
     extra = 0
 
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #
+    #     self.model.title.get_queryset().filter(title = 'rest 1')
+
+    # def get_queryset(self, request):
+    #     return ItemField.objects.all()
+        # import pdb; pdb.set_trace()
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     inlines = [ItemFieldInline, ]
     list_display = ('title', )
 
+    def get_queryset(self, request):
+        import pdb; pdb.set_trace()
 
-# class ItemFieldAdminForm(forms.ModelForm):
-#     class Meta:
-#         model = ItemField
-#         fields = ['value']  # Указываем, какие поля включить в форму
-#
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         # Ограничиваем выбор полей только теми, которые относятся к каталогу товаров данного Item
-#         if self.instance and self.instance.item:
-#             self.fields['title'].queryset = self.instance.item.catalog.parameters.fields.all()
-#
 
 class FieldInline(admin.StackedInline):
-    # form = ItemFieldAdminForm
     model = Field
     extra = 1
 
@@ -48,4 +59,3 @@ class FieldInline(admin.StackedInline):
 @admin.register(Parameters)
 class ParametersAdmin(admin.ModelAdmin):
     inlines = [FieldInline]
-
