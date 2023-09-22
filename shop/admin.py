@@ -29,7 +29,7 @@ class ItemFieldAdminForm(forms.ModelForm):
 
 
 class ItemFieldInline(admin.TabularInline):
-    form = ItemFieldAdminForm
+    # form = ItemFieldAdminForm
     model = ItemField
     extra = 0
 
@@ -37,21 +37,22 @@ class ItemFieldInline(admin.TabularInline):
     #     super().__init__(*args, **kwargs)
     #
     #     self.model.title.get_queryset().filter(title = 'rest 1')
-
+    #
     # def get_queryset(self, request):
     #     return ItemField.objects.all()
-        # import pdb; pdb.set_trace()
+    #     import pdb; pdb.set_trace()
+
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     inlines = [ItemFieldInline, ]
     list_display = ('title', )
 
-    def get_queryset(self, request):
-        import pdb; pdb.set_trace()
+    # def get_queryset(self, request):
+    #     import pdb; pdb.set_trace()
 
 
-class FieldInline(admin.StackedInline):
+class FieldInline(admin.TabularInline):
     model = Field
     extra = 1
 
