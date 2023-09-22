@@ -38,7 +38,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://localhost:3000",
     "http://localhost:5000",
-    "https://metallo-mir-kg.vercel.com",
+    "https://metallomir.vercel.app",
 ]
 
 

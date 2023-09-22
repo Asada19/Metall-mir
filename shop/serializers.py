@@ -30,3 +30,10 @@ class CatalogDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Catalog
         fields = ('id', 'title', 'items')
+
+
+class CatalogDescriptionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Catalog
+        fields = ('id', 'title', 'description', 'image')
