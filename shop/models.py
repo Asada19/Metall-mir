@@ -7,7 +7,6 @@ class Catalog(models.Model):
     image = models.ImageField(upload_to='media', blank=True, verbose_name='Изображение')
     price_file = models.FileField(upload_to='prices', blank=True, verbose_name='Файл с ценами')
 
-
     def __str__(self):
         return self.title
 
@@ -42,7 +41,6 @@ class Field(models.Model):
 class Item(models.Model):
     title = models.CharField(max_length=100, blank=True, verbose_name='Название')
     category = models.ForeignKey(Catalog, on_delete=models.CASCADE, related_name='items', blank=True)
-
 
     def __str__(self):
         return self.title

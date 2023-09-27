@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Catalog, Item, ItemField, OurClientsLogo, OurProvidersLogo
 
 
-
 class CatalogSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -46,13 +45,6 @@ class CatalogDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Catalog
         fields = ('id', 'title', 'parameters', 'items')
-
-
-class CatalogDescriptionSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Catalog
-        fields = ('id', 'title', 'items', 'price_file')
 
 
 class CatalogDescriptionSerializer(serializers.ModelSerializer):
