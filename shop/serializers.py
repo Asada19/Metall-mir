@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Catalog, Item, ItemField, OurClientsLogo, OurProvidersLogo
+from .models import Catalog, Item, ItemField, MainPriceFile, OurClientsLogo, OurProvidersLogo
 
 
 class CatalogSerializer(serializers.ModelSerializer):
@@ -50,4 +50,11 @@ class OurProvidersLogoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OurProvidersLogo
+        fields = '__all__'
+
+
+class MainPriceFileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MainPriceFile
         fields = '__all__'

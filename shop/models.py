@@ -60,3 +60,15 @@ class OurProvidersLogo(models.Model):
     class Meta:
         verbose_name = 'Логитипы поставщиков'
         verbose_name_plural = verbose_name
+
+
+class MainPriceFile(models.Model):
+    file = models.FileField(upload_to='file_price', verbose_name='файл с ценами')
+
+    def __str__(self) -> str:
+        return self.file.__str__()
+    
+    class Meta:
+        verbose_name = 'Прайс лист на главной странице'
+        verbose_name_plural = verbose_name
+        

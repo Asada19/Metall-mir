@@ -1,7 +1,7 @@
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
-from .serializers import CatalogSerializer, ItemSerializer, CatalogDetailSerializer, CatalogDescriptionSerializer, \
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from .serializers import CatalogSerializer, ItemSerializer, CatalogDetailSerializer, CatalogDescriptionSerializer, MainPriceFileSerializer, \
     OurClientsLogoSerializer, OurProvidersLogoSerializer
-from .models import Catalog, Item, ItemField, OurClientsLogo, OurProvidersLogo
+from .models import Catalog, Item, MainPriceFile, OurClientsLogo, OurProvidersLogo
 
 
 class CatalogListAPIView(ListAPIView):
@@ -44,3 +44,10 @@ class OurProvidersLogoAPIView(ListAPIView):
     serializer_class = OurProvidersLogoSerializer
     model = OurProvidersLogo
     queryset = OurProvidersLogo.objects.all()
+
+
+class MainPriceFileAPIView(ListAPIView):
+    serializer_class = MainPriceFileSerializer 
+    model = MainPriceFile
+    queryset = MainPriceFile.objects.all()
+    

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Catalog, Item, ItemField, OurProvidersLogo, OurClientsLogo
+from .models import Catalog, Item, ItemField, MainPriceFile, OurProvidersLogo, OurClientsLogo
 from django.utils.html import format_html
 
 
@@ -27,7 +27,7 @@ class ItemAdmin(admin.ModelAdmin):
     inlines = [ItemFieldInline, ]
     list_display = ('title', )
 
-
+@admin.register(OurProvidersLogo)
 class OurProvidersLogoAdmin(admin.ModelAdmin):
     model = OurProvidersLogo
 
@@ -39,9 +39,8 @@ class OurProvidersLogoAdmin(admin.ModelAdmin):
     fields = ('image', 'image_tag')
     readonly_fields = ('image_tag', )
 
-
+@admin.register(OurClientsLogo)
 class OurClientsLogoAdmin(admin.ModelAdmin):
-    model = OurClientsLogo
 
     def image_tag(self, obj):
         return format_html('<img src="{url}" width="auto" height="200px"/>'.format(url=obj.image.url))
@@ -52,5 +51,24 @@ class OurClientsLogoAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag', )
 
 
-admin.site.register(OurProvidersLogo, OurProvidersLogoAdmin)
-admin.site.register(OurClientsLogo, OurClientsLogoAdmin)
+@admin.register(MainPriceFile)
+class PriceListAdmin(admin.ModelAdmin):
+    fields = ('file', )
+
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= 1:
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        if self.model.objects.count() < 1:
+            return super().add_view(request, extra_context)
+        else:
+            object = (self.model.objects.first()).id
+            return super().change_view(request=request,
+                                       extra_context=extra_context,
+                                       object_id=str(object))
+

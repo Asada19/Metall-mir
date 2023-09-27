@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import CatalogListAPIView, CatalogDetailAPIView, ItemsListAPIView, ItemDetailAPIView, \
-    CatalogDescriptionAPIView, OurClientsLogoAPIView, OurProvidersLogoAPIView
+    CatalogDescriptionAPIView, OurClientsLogoAPIView, OurProvidersLogoAPIView, MainPriceFileAPIView
 
 urlpatterns = [
     path('catalog/', CatalogListAPIView.as_view(), name='catalog list'),
@@ -9,6 +9,7 @@ urlpatterns = [
     path('items/', ItemsListAPIView.as_view(), name='items list'),
     path('items/<int:pk>', ItemDetailAPIView.as_view(), name='items detail'),
     path('providers_logo/', OurProvidersLogoAPIView.as_view(), name='providers logos'),
-    path('clients_logo/', OurClientsLogoAPIView.as_view(), name='clients logos')
+    path('clients_logo/', OurClientsLogoAPIView.as_view(), name='clients logos'),
+    path('main_price_file', MainPriceFileAPIView.as_view(), name='main price file')
 ]
 
