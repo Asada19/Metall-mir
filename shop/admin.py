@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Catalog, Item, ItemField, Parameters, Field
+from .models import Catalog, Item, ItemField, OurProvidersLogo, OurClientsLogo
 from django.utils.html import format_html
 from django import forms
 
@@ -8,7 +8,9 @@ from django import forms
 class CatalogAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
-        return format_html('<img src="{url}" width="auto" height="200px"/>'.format(url=obj.image.url))
+        if obj.image:
+            return format_html('<img src="{url}" width="auto" height="200px"/>'.format(url=obj.image.url))
+        return 'Нет изображения'
 
     image_tag.short_description = 'Image'
     list_display = ('id', 'title', 'description', 'image_tag')
@@ -48,15 +50,30 @@ class ItemAdmin(admin.ModelAdmin):
     inlines = [ItemFieldInline, ]
     list_display = ('title', )
 
-    # def get_queryset(self, request):
-    #     import pdb; pdb.set_trace()
+
+class OurProvidersLogoAdmin(admin.ModelAdmin):
+    model = OurProvidersLogo
+
+    def image_tag(self, obj):
+        return format_html('<img src="{url}" width="auto" height="200px"/>'.format(url=obj.image.url))
+
+    image_tag.short_description = 'Image'
+
+    fields = ('image', 'image_tag')
+    readonly_fields = ('image_tag', )
 
 
-class FieldInline(admin.TabularInline):
-    model = Field
-    extra = 1
+class OurClientsLogoAdmin(admin.ModelAdmin):
+    model = OurClientsLogo
+
+    def image_tag(self, obj):
+        return format_html('<img src="{url}" width="auto" height="200px"/>'.format(url=obj.image.url))
+
+    image_tag.short_description = 'Image'
+
+    fields = ('image', 'image_tag')
+    readonly_fields = ('image_tag', )
 
 
-@admin.register(Parameters)
-class ParametersAdmin(admin.ModelAdmin):
-    inlines = [FieldInline]
+admin.site.register(OurProvidersLogo, OurProvidersLogoAdmin)
+admin.site.register(OurClientsLogo, OurClientsLogoAdmin)
