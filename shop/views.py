@@ -1,6 +1,7 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
-from .serializers import CatalogSerializer, ItemSerializer, CatalogDetailSerializer, CatalogDescriptionSerializer
-from .models import Catalog, Item, ItemField
+from .serializers import CatalogSerializer, ItemSerializer, CatalogDetailSerializer, CatalogDescriptionSerializer, \
+    OurClientsLogoSerializer, OurProvidersLogoSerializer
+from .models import Catalog, Item, ItemField, OurClientsLogo, OurProvidersLogo
 
 
 class CatalogListAPIView(ListAPIView):
@@ -31,3 +32,15 @@ class ItemDetailAPIView(RetrieveAPIView):
     serializer_class = ItemSerializer
     model = Item
     queryset = Item.objects.all()
+
+
+class OurClientsLogoAPIView(ListAPIView):
+    serializer_class = OurClientsLogoSerializer
+    model = OurClientsLogo
+    queryset = OurClientsLogo.objects.all()
+
+
+class OurProvidersLogoAPIView(ListAPIView):
+    serializer_class = OurProvidersLogoSerializer
+    model = OurProvidersLogo
+    queryset = OurProvidersLogo.objects.all()

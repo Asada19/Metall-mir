@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Catalog, Item, ItemField
+from .models import Catalog, Item, ItemField, OurClientsLogo, OurProvidersLogo
 
 
 class CatalogSerializer(serializers.ModelSerializer):
@@ -29,11 +29,25 @@ class CatalogDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Catalog
-        fields = ('id', 'title', 'items')
+        fields = ('id', 'title', 'items', 'price_file')
 
 
 class CatalogDescriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Catalog
-        fields = ('id', 'title', 'description', 'image')
+        fields = ('id', 'title', 'description', 'image', 'price_file')
+
+
+class OurClientsLogoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OurClientsLogo
+        fields = '__all__'
+
+
+class OurProvidersLogoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OurProvidersLogo
+        fields = '__all__'
