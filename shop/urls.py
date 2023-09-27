@@ -2,6 +2,7 @@ from django.urls import path
 from .views import CatalogListAPIView, CatalogDetailAPIView, ItemsListAPIView, ItemDetailAPIView, \
     CatalogDescriptionAPIView, OurClientsLogoAPIView, OurProvidersLogoAPIView
 
+
 urlpatterns = [
     path('catalog/', CatalogListAPIView.as_view(), name='catalog list'),
     path('catalog/<int:pk>/', CatalogDescriptionAPIView.as_view(), name='catalog detail'),
