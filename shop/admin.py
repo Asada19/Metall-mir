@@ -37,6 +37,7 @@ class OurProvidersLogoAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
     fields = ('image', 'image_tag')
+    list_display = ('image', 'image_tag')
     readonly_fields = ('image_tag', )
 
 @admin.register(OurClientsLogo)
@@ -48,6 +49,7 @@ class OurClientsLogoAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
     fields = ('image', 'image_tag')
+    list_display = ('image', 'image_tag')
     readonly_fields = ('image_tag', )
 
 
